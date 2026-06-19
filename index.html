@@ -1,14 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Placeholder</title>
+  <title>Nina Tomisch – Physiotherapie &amp; Heilpraxis Berlin-Neukölln</title>
+  <meta name="description" content="Nina Tomisch – Physiotherapie und Heilpraxis am Weichselplatz in Berlin-Neukölln. Die neue Website entsteht gerade. Kontakt und Öffnungszeiten.">
+
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="apple-touch-icon" href="logo.jpg">
+
+  <link rel="stylesheet" href="assets/css/site.css">
+
+  <style>
+    .coming { display: flex; flex-direction: column; min-height: 100vh; }
+    .coming__wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 64px var(--pad-x);
+      background: radial-gradient(120% 90% at 50% 0%, var(--c-blue-tint), var(--bg));
+    }
+    .coming__logo {
+      height: 92px;
+      width: auto;
+      border-radius: 16px;
+      box-shadow: 0 12px 34px -14px rgba(47, 77, 98, .5);
+      margin-bottom: 30px;
+    }
+    .coming .eyebrow { color: var(--c-mid-blue); margin-bottom: 14px; }
+    .coming h1 { font-size: clamp(42px, 8vw, 84px); }
+    .coming__soon {
+      margin-top: 16px;
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-muted);
+    }
+    .coming__bar {
+      width: 100%;
+      max-width: 200px;
+      margin: 38px auto;
+      border-radius: 3px;
+    }
+    .coming__grid {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 30px 60px;
+      justify-content: center;
+    }
+    .coming__label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-mid-blue);
+      margin-bottom: 8px;
+    }
+    .coming__item p { font-size: 16px; line-height: 1.65; color: var(--text); }
+    .coming__item a { color: var(--c-deep-blue); text-decoration: none; }
+    .coming__item a:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      .coming__grid { grid-template-columns: 1fr; gap: 26px; }
+    }
+  </style>
 </head>
-<body>
-  <main>
-    <h1>Coming soon</h1>
-    <p>Nothing to see here yet.</p>
+<body class="coming">
+  <main class="coming__wrap">
+    <img class="coming__logo" src="logo.jpg" alt="Logo Nina Tomisch Physiotherapie – stilisierte Wirbelsäule">
+    <span class="eyebrow">Physiotherapie · Heilpraxis</span>
+    <h1>Nina Tomisch</h1>
+    <p class="coming__soon">Die neue Website entsteht gerade – schön, dass Sie da sind.</p>
+
+    <hr class="bar coming__bar">
+
+    <div class="coming__grid">
+      <div class="coming__item">
+        <span class="coming__label">Adresse</span>
+        <p>Weichselplatz 3<br>12045 Berlin (Neukölln)</p>
+      </div>
+      <div class="coming__item">
+        <span class="coming__label">Öffnungszeiten</span>
+        <p>Montag 8–15 Uhr</p>
+      </div>
+      <div class="coming__item">
+        <span class="coming__label">Kontakt</span>
+        <p>
+          <a href="tel:+4915510656452">+49 155 10656452</a><br>
+          <a href="mailto:physio@ninatomisch.de">physio@ninatomisch.de</a>
+        </p>
+      </div>
+    </div>
   </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="jahr">2026</span> Nina Tomisch · Physiotherapie</span>
+      <span><a href="impressum.html">Impressum</a> &nbsp;·&nbsp; <a href="datenschutz.html">Datenschutz</a></span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("jahr").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
