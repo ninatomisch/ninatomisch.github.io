@@ -119,11 +119,21 @@
     <section class="room" id="praxis">
       <div class="container">
         <span class="eyebrow">Praxis</span>
-        <figure class="room__figure">
-          <!-- Platzhalter: später durch ein Foto des Behandlungsraums ersetzen -->
-          <div class="room__img">Foto des Behandlungsraums folgt</div>
-          <figcaption class="room__cap">Mein Behandlungsraum im Herzen von Neukölln.</figcaption>
-        </figure>
+        <div class="room__grid">
+          <figure class="room__figure">
+            <!-- Platzhalter: später durch ein Foto des Behandlungsraums ersetzen -->
+            <div class="room__img">Foto des Behandlungsraums folgt</div>
+            <figcaption class="room__cap">Mein Behandlungsraum im Herzen von Neukölln.</figcaption>
+          </figure>
+          <!-- Zwei-Klick-Karte: lädt OpenStreetMap erst nach Klick (DSGVO) -->
+          <div class="map" data-src="https://www.openstreetmap.org/export/embed.html?bbox=13.4345%2C52.4858%2C13.4425%2C52.4894&amp;layer=mapnik&amp;marker=52.4875872%2C13.4385220">
+            <div class="map__overlay">
+              <button class="map__btn" type="button">Karte laden</button>
+              <p class="map__hint">Beim Laden wird eine Verbindung zu OpenStreetMap hergestellt.</p>
+              <a class="map__link" href="https://www.openstreetmap.org/?mlat=52.4875872&amp;mlon=13.4385220#map=17/52.4875872/13.4385220" target="_blank" rel="noopener">In OpenStreetMap öffnen →</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -159,6 +169,14 @@
             </li>
           </ul>
         </div>
+        <!-- Zwei-Klick-Karte: lädt OpenStreetMap erst nach Klick (DSGVO) -->
+        <div class="map" data-src="https://www.openstreetmap.org/export/embed.html?bbox=13.4325%2C52.4853%2C13.4445%2C52.4899&amp;layer=mapnik&amp;marker=52.4875872%2C13.4385220">
+          <div class="map__overlay">
+            <button class="map__btn" type="button">Karte laden</button>
+            <p class="map__hint">Beim Laden wird eine Verbindung zu OpenStreetMap hergestellt.</p>
+            <a class="map__link" href="https://www.openstreetmap.org/?mlat=52.4875872&amp;mlon=13.4385220#map=17/52.4875872/13.4385220" target="_blank" rel="noopener">In OpenStreetMap öffnen →</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -181,6 +199,24 @@
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
+    // Zwei-Klick-Karte: OpenStreetMap erst nach aktivem Klick laden (DSGVO)
+    document.querySelectorAll(".map").forEach(function (map) {
+      var btn = map.querySelector(".map__btn");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var src = map.getAttribute("data-src");
+        if (!src) return;
+        var ifr = document.createElement("iframe");
+        ifr.setAttribute("src", src);
+        ifr.setAttribute("title", "Standort der Praxis auf OpenStreetMap");
+        ifr.setAttribute("loading", "lazy");
+        ifr.setAttribute("referrerpolicy", "no-referrer");
+        ifr.setAttribute("allowfullscreen", "");
+        map.innerHTML = "";
+        map.appendChild(ifr);
+      });
+    });
   </script>
 </body>
 </html>
