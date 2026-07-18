@@ -33,11 +33,9 @@
   <main id="top">
     <!-- HERO -->
     <section class="hero">
-      <!-- Platzhalter-Hintergrund: später durch Foto ersetzen (Nina mit Patientin) -->
       <div class="hero__bg"></div>
-      <div class="hero__note">Platzhalter – Titelbild (Nina mit Patientin) folgt</div>
       <div class="container hero__inner">
-        <h1>Privatpraxis für ganzheitliche Physiotherapie und Heilpraktik</h1>
+        <h1>Privatpraxis für ganzheitliche Physiotherapie</h1>
         <p class="hero__lead">individuell, nachhaltig, kompetent</p>
         <div class="hero__actions">
           <a class="btn btn--light" href="#kontakt">Termin vereinbaren <span class="arr">→</span></a>
@@ -51,8 +49,9 @@
       <div class="container">
         <span class="eyebrow">Über mich</span>
         <div class="mission__grid">
-          <!-- Platzhalter: später durch ein Portraitfoto ersetzen -->
-          <div class="mission__media">Foto folgt</div>
+          <div class="mission__media">
+            <img src="img/ueber-mich.jpg" alt="Nina Tomisch bei der Behandlung einer Patientin">
+          </div>
           <div class="mission__body">
             <p class="mission__intro">Mein Name ist Nina Tomisch.</p>
             <p>
@@ -116,35 +115,55 @@
         </div>
         <div class="cards">
           <article class="service">
-            <div class="service__media">Bild folgt</div>
+            <div class="service__media">
+              <video muted loop playsinline preload="metadata" poster="assets/video/poster-manuelle-therapie.jpg" aria-label="Video: Manuelle Therapie">
+                <source src="assets/video/manuelle-therapie.mp4" type="video/mp4">
+              </video>
+            </div>
             <div class="service__body">
               <h3>Manuelle Therapie</h3>
               <p>Manuelle Techniken zur Verbesserung der Gelenkbeweglichkeit und Behandlung von Funktionsstörungen – nach osteopathischem Konzept</p>
             </div>
           </article>
           <article class="service">
-            <div class="service__media">Bild folgt</div>
+            <div class="service__media">
+              <video muted loop playsinline preload="metadata" poster="assets/video/poster-trainingstherapie.jpg" aria-label="Video: Trainingstherapie">
+                <source src="assets/video/trainingstherapie.mp4" type="video/mp4">
+              </video>
+            </div>
             <div class="service__body">
               <h3>Trainingstherapie</h3>
               <p>Erarbeiten individueller Trainingspläne zur Verbesserung von Haltung, Kraft und Stabilität</p>
             </div>
           </article>
           <article class="service">
-            <div class="service__media">Bild folgt</div>
+            <div class="service__media">
+              <video muted loop playsinline preload="metadata" poster="assets/video/poster-schmerztherapie.jpg" aria-label="Video: Schmerztherapie">
+                <source src="assets/video/schmerztherapie.mp4" type="video/mp4">
+              </video>
+            </div>
             <div class="service__body">
               <h3>Schmerztherapie</h3>
               <p>Akute und chronische Schmerzen verstehen und ganzheitlich behandeln</p>
             </div>
           </article>
           <article class="service">
-            <div class="service__media">Bild folgt</div>
+            <div class="service__media">
+              <video muted loop playsinline preload="metadata" poster="assets/video/poster-op-vor-nachsorge.jpg" aria-label="Video: Vor- und Nachsorge bei Operationen">
+                <source src="assets/video/op-vor-nachsorge.mp4" type="video/mp4">
+              </video>
+            </div>
             <div class="service__body">
               <h3>Vor- und Nachsorge bei Operationen</h3>
               <p>Gezielte Begleitung vor und nach operativen Eingriffen</p>
             </div>
           </article>
           <article class="service">
-            <div class="service__media">Bild folgt</div>
+            <div class="service__media">
+              <video muted loop playsinline preload="metadata" poster="assets/video/poster-kiefertherapie.jpg" aria-label="Video: Kiefergelenkstherapie">
+                <source src="assets/video/kiefertherapie.mp4" type="video/mp4">
+              </video>
+            </div>
             <div class="service__body">
               <h3>Kiefergelenkstherapie</h3>
               <p>Behandlung von Funktionsstörungen des Kiefergelenks sowie möglichen begleitenden Beschwerden wie Kopfschmerzen, Schwindel und Tinnitus</p>
@@ -159,8 +178,9 @@
       <div class="container">
         <span class="eyebrow">Praxis</span>
         <figure class="room__figure">
-          <!-- Platzhalter: später durch ein Foto des Behandlungsraums ersetzen -->
-          <div class="room__img">Foto des Behandlungsraums folgt</div>
+          <div class="room__img">
+            <img src="img/praxis.jpg" alt="Behandlungsraum der Praxis mit Behandlungsliege">
+          </div>
           <figcaption class="room__cap">Mein Behandlungsraum im Herzen von Neukölln.</figcaption>
         </figure>
       </div>
@@ -171,10 +191,10 @@
       <div class="container">
         <div class="contact__grid">
           <div>
-            <h2>Melden Sie sich</h2>
+            <h2>Melden Sie sich gerne</h2>
             <p class="contact__lead">
               telefonisch oder per Mail<br>
-              <span class="contact__small">gemeinsam finden wir einen geeigneten Termin</span>
+              <span class="contact__small">Gemeinsam finden wir einen geeigneten Termin</span>
             </p>
             <a class="btn btn--light" href="mailto:physio@ninatomisch.de">E-Mail schreiben <span class="arr">→</span></a>
           </div>
@@ -227,6 +247,28 @@
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
+    // Schwerpunkt-Videos: nur abspielen, solange sie im Sichtfeld sind
+    var videos = document.querySelectorAll(".service__media video");
+    if ("IntersectionObserver" in window) {
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var v = entry.target;
+          if (entry.isIntersecting) {
+            var p = v.play();
+            if (p && p.catch) p.catch(function () {});
+          } else {
+            v.pause();
+          }
+        });
+      }, { threshold: 0.25 });
+      videos.forEach(function (v) { vio.observe(v); });
+    } else {
+      videos.forEach(function (v) {
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+    }
 
     // Zwei-Klick-Karte: OpenStreetMap erst nach aktivem Klick laden (DSGVO)
     document.querySelectorAll(".map").forEach(function (map) {
